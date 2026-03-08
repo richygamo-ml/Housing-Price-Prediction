@@ -81,3 +81,24 @@ ax.set_ylabel("Predicted Prices")
 ax.set_title("Actual vs Predicted Housing Prices")
 
 st.pyplot(fig)
+
+# Let's check which feature(s) is/are the most important
+st.subheader("Feature Importance")
+
+importance = model.coef_
+features = X.columns
+
+importance_df = pd.DataFrame({
+    "Feature": features,
+    "Importance": importance
+})
+
+importance_df = importance_df.sort_values(by="Importance", ascending=False)
+
+fig2, ax2 = plt.subplots()
+
+ax2.barh(importance_df["Feature"], importance_df["Importance"])
+ax2.set_xlabel("Coefficient Value")
+ax2.set_title("Feature Importance")
+
+st.pyplot(fig2)
