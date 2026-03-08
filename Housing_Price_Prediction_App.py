@@ -8,7 +8,7 @@ from sklearn.linear_model import LinearRegression
 # load dataset
 data = pd.read_csv("Housing_data.csv")
 
-X = data.drop(Predicted Price", axis=1)
+X = data.drop("Predicted Price", axis=1)
 y = data["Predicted Price"]
 
 model = LinearRegression()
