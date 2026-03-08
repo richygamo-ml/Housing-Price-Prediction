@@ -1,40 +1,63 @@
-# Housing Price Prediction ML App
+# Housing Price Prediction Web App
 
-This project is a machine learning web application that predicts housing prices based on 
-input features.
+This project is an interactive machine learning web application that predicts California 
+housing prices based on economic and geographic features.
 
-The model was trained using Python and deployed using Streamlit.
+The application is built using Python and deployed with Streamlit.
 
 ## Features
-- Predicts housing prices from user inputs
-- Interactive web interface built with Streamlit
-- Machine learning model trained with Scikit-Learn
+
+- Predict housing prices from user inputs
+- Interactive sliders for feature selection
+- Model evaluation metrics (R², MAE, MSE)
+- Actual vs Predicted visualization
+- Feature importance analysis
+- Dataset preview
+
+## Machine Learning Model
+
+The model uses Linear Regression trained on the California Housing dataset.
+
+Target Variable:
+MedHouseValue (median house value)
+
+Key Features:
+- Median Income
+- House Age
+- Average Rooms
+- Average Bedrooms
+- Population
+- Average Occupancy
+- Latitude
+- Longitude
 
 ## Tech Stack
+
 - Python
 - Pandas
 - NumPy
 - Scikit-Learn
+- Matplotlib
 - Streamlit
 
-## How to Run Locally
+## Run Locally
 
-Clone the repository:
+Clone the repository
 
 git clone https://github.com/richygamo-ml/Housing-Price-Prediction.git
 
-Navigate into the project folder:
+Navigate to the project folder
 
 cd Housing-Price-Prediction
 
-Install dependencies:
+Install dependencies
 
 pip install -r requirements.txt
 
-Run the app:
+Run the app
 
 streamlit run Housing_Price_Prediction_App.py
 
-The application will open in your browser at:
+## Live App
 
-http://localhost:8501
+The application is deployed using Streamlit Cloud.
