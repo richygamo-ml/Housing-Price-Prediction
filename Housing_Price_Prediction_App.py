@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
+import matplotlib.pyplot as plt
 
 # Load dataset
 data = pd.read_csv("Housing_data.csv")
@@ -68,3 +69,15 @@ col1, col2, col3 = st.columns(3)
 col1.metric("R² Score", f"{r2:.3f}")
 col2.metric("MAE", f"{mae:.3f}")
 col3.metric("MSE", f"{mse:.3f}")
+
+# Visualization
+st.subheader("Actual vs Predicted Housing Prices")
+
+fig, ax = plt.subplots()
+
+ax.scatter(y, y_predicted, alpha=0.5)
+ax.set_xlabel("Actual Prices")
+ax.set_ylabel("Predicted Prices")
+ax.set_title("Actual vs Predicted Housing Prices")
+
+st.pyplot(fig)
