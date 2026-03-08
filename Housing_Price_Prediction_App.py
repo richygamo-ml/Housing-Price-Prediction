@@ -30,7 +30,7 @@ Enter values below to estimate a house value.
 """)
 
 # Include sliders for fast and engaging adjustments
-MedInc = st.slider("Median Income", 0.0, 15.0, 3.0)
+MedInc = st.slider("Median Income (× $100,000)", 0.0, 15.0, 3.0)
 HouseAge = st.slider("House Age", 1, 50, 20)
 AveRooms = st.slider("Average Rooms", 1.0, 10.0, 5.0)
 AveBedrms = st.slider("Average Bedrooms", 0.5, 5.0, 1.0)
