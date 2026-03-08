@@ -20,23 +20,6 @@ def train_model():
 
 model = train_model()
 
-# Target predicted (not to be mistaken for initial target, y)
-y_predicted = model.predict(X)
-
-# Metrics evaluation
-r2 = r2_score(y, y_predicted)
-mae = mean_absolute_error(y, y_predicted)
-mse = mean_squared_error(y, y_predicted)
-
-# Dislay metrics in the app
-st.subheader("Model Evaluation Metrics")
-
-col1, col2, col3 = st.columns(3)
-
-col1.metric("R² Score", f"{r2:.3f}")
-col2.metric("MAE", f"{mae:.3f}")
-col3.metric("MSE", f"{mse:.3f}")
-
 st.title("Housing Price Prediction")
 
 # Briefly describe the app
