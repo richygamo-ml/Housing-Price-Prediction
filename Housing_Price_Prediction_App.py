@@ -1,16 +1,23 @@
 import streamlit as st
-import pickle
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import LinearRegression
 
 # load dataset
-data = pd.read_csv("Housing_Price_Prediction/Housing_data.csv")
+data = pd.read_csv("Housing_data.csv")
+
+# features and target
 X = data.drop("MedHouseValue", axis=1)
 y = data["MedHouseValue"]
 
-model = LinearRegression()
-model.fit(X, y)
+# Ensure model doesn't retrain every time the app refreshes
+@st.cache_resource
+def train_model():
+    model = LinearRegression()
+    model.fit(X, y)
+    return model
+
+model = train_model()
 
 st.title("Housing Price Prediction")
 
@@ -30,4 +37,4 @@ if st.button("Predict"):
 
     prediction = model.predict(features)
 
-    st.success(f"MedHouseValue: ${prediction[0]*100000:.2f}")
+    st.success(f"Predicted House Value: ${prediction[0]*100000:.2f}")
