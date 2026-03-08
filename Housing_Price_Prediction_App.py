@@ -2,15 +2,16 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import LinearRegression
+from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
 
-# load dataset
+# Load dataset
 data = pd.read_csv("Housing_data.csv")
 
-# features and target
+# Features and target
 X = data.drop("MedHouseValue", axis=1)
 y = data["MedHouseValue"]
 
-# Ensure model doesn't retrain every time the app refreshes
+# Train model and ensure model doesn't retrain every time the app refreshes
 @st.cache_resource
 def train_model():
     model = LinearRegression()
@@ -18,6 +19,23 @@ def train_model():
     return model
 
 model = train_model()
+
+# Target predicted (not to be mistaken for initial target, y)
+y_predicted = model.predict(X)
+
+# Metrics evaluation
+r2 = r2_score(y, y_predicted)
+mae = mean_absolute_error(y, y_predicted)
+mse = mean_squared_error(y, y_predicted)
+
+# Dislay metrics in the app
+st.subheader("Model Evaluation Metrics")
+
+col1, col2, col3 = st.columns(3)
+
+col1.metric("R² Score", f"{r2:.3f}")
+col2.metric("MAE", f"{mae:.3f}")
+col3.metric("MSE", f"{mse:.3f}")
 
 st.title("Housing Price Prediction")
 
@@ -50,3 +68,20 @@ if st.button("Predict"):
     prediction = model.predict(features)
 
     st.success(f"Predicted House Value: ${prediction[0]*100000:.2f}")
+
+# Target predicted (not to be mistaken for initial target, y)
+y_predicted = model.predict(X)
+
+# Metrics evaluation
+r2 = r2_score(y, y_predicted)
+mae = mean_absolute_error(y, y_predicted)
+mse = mean_squared_error(y, y_predicted)
+
+# Dislay metrics in the app
+st.subheader("Model Evaluation Metrics")
+
+col1, col2, col3 = st.columns(3)
+
+col1.metric("R² Score", f"{r2:.3f}")
+col2.metric("MAE", f"{mae:.3f}")
+col3.metric("MSE", f"{mse:.3f}")
