@@ -21,14 +21,26 @@ model = train_model()
 
 st.title("Housing Price Prediction")
 
-MedInc = st.number_input("Median Income")
-HouseAge = st.number_input("House Age")
-AveRooms = st.number_input("Average Rooms")
-AveBedrms = st.number_input("Average Bedrooms")
-Population = st.number_input("Population")
-AveOccup = st.number_input("Average Occupancy")
-Latitude = st.number_input("Latitude")
-Longitude = st.number_input("Longitude")
+# Briefly describe the app
+st.write("""
+This machine learning app predicts California housing prices based on
+economic and geographic features from the California Housing dataset.
+Enter values below to estimate a house value.
+""")
+
+# Include sliders for fast and engaging adjustments
+MedInc = st.slider("Median Income", 0.0, 15.0, 3.0)
+HouseAge = st.slider("House Age", 1, 50, 20)
+AveRooms = st.slider("Average Rooms", 1.0, 10.0, 5.0)
+AveBedrms = st.slider("Average Bedrooms", 0.5, 5.0, 1.0)
+Population = st.slider("Population", 0, 5000, 1000)
+AveOccup = st.slider("Average Occupancy", 1.0, 10.0, 3.0)
+Latitude = st.slider("Latitude", 32.0, 42.0, 36.0)
+Longitude = st.slider("Longitude", -125.0, -114.0, -120.0)
+
+# User can see the data used to train the models
+st.subheader("Dataset Preview")
+st.dataframe(data.head())
 
 if st.button("Predict"):
 
