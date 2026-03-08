@@ -30,4 +30,4 @@ if st.button("Predict"):
 
     prediction = model.predict(features)
 
-    st.success(f"Predicted Price: ${prediction[0]*100000:.2f}")
+    st.success(f"MedHouseValue: ${prediction[0]*100000:.2f}")
