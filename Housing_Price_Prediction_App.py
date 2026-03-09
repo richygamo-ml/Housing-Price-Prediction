@@ -29,10 +29,17 @@ model = train_model()
 st.title("Housing Price Prediction")
 
 # Briefly describe the app
-st.write("""
-This machine learning app predicts California housing prices based on
-economic and geographic features from the California Housing dataset.
-Enter values below to estimate a house value.
+st.sidebar.title("About")
+
+st.sidebar.write("""
+This machine learning app predicts California housing prices using a Linear Regression model trained on the California Housing dataset.
+
+Features include:
+- Median income
+- House age
+- Average rooms
+- Population
+- Geographic location
 """)
 
 # Include sliders for fast and engaging adjustments
@@ -57,11 +64,13 @@ if st.button("Predict"):
     prediction = model.predict(features)
 
     st.success(f"Predicted House Value: ${prediction[0]*100000:.2f}")
+    st.caption("Prediction represents the estimated median house value based on the selected housing and geographic features.")
 
 # Define predicted target on the test set (not to be mistaken for initial target, y)
 y_predicted = model.predict(X_test)
 
 # Metrics evaluation
+st.header("Model Performance")
 st.caption(
 "Model performance is evaluated on a 20% test dataset that was not used during training.")
 
