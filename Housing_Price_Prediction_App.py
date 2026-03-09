@@ -4,6 +4,7 @@ import pandas as pd
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
 import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
 
 # Load dataset
 data = pd.read_csv("Housing_data.csv")
@@ -12,11 +13,15 @@ data = pd.read_csv("Housing_data.csv")
 X = data.drop("MedHouseValue", axis=1)
 y = data["MedHouseValue"]
 
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
 # Train model and ensure model doesn't retrain every time the app refreshes
 @st.cache_resource
 def train_model():
     model = LinearRegression()
-    model.fit(X, y)
+    model.fit(X_train, y_train)
     return model
 
 model = train_model()
@@ -53,13 +58,16 @@ if st.button("Predict"):
 
     st.success(f"Predicted House Value: ${prediction[0]*100000:.2f}")
 
-# Target predicted (not to be mistaken for initial target, y)
-y_predicted = model.predict(X)
+# Define predicted target on the test set (not to be mistaken for initial target, y)
+y_predicted = model.predict(X_test)
 
 # Metrics evaluation
-r2 = r2_score(y, y_predicted)
-mae = mean_absolute_error(y, y_predicted)
-mse = mean_squared_error(y, y_predicted)
+st.caption(
+"Model performance is evaluated on a 20% test dataset that was not used during training.")
+
+r2 = r2_score(y_test, y_predicted)
+mae = mean_absolute_error(y_test, y_predicted)
+mse = mean_squared_error(y_test, y_predicted)
 
 # Dislay metrics in the app
 st.subheader("Model Evaluation Metrics")
@@ -75,7 +83,7 @@ st.subheader("Actual vs Predicted Housing Prices")
 
 fig, ax = plt.subplots()
 
-ax.scatter(y, y_predicted, alpha=0.5)
+ax.scatter(y_test, y_predicted, alpha=0.5)
 ax.set_xlabel("Actual Prices")
 ax.set_ylabel("Predicted Prices")
 ax.set_title("Actual vs Predicted Housing Prices")
