@@ -34,11 +34,12 @@ st.sidebar.title("About")
 st.sidebar.write("""
 This machine learning app predicts California housing prices using a Linear Regression model trained on the California Housing dataset.
 
-Features include:
+Features include but are not limited to:
 - Median income
 - House age
 - Average rooms
 - Population
+- Average occupancy
 - Geographic location
 """)
 
@@ -71,8 +72,7 @@ y_predicted = model.predict(X_test)
 
 # Metrics evaluation
 st.header("Model Performance")
-st.caption(
-"Model performance is evaluated on a 20% test dataset that was not used during training.")
+st.caption("Model performance is evaluated on a 20% test dataset that was not used during training.")
 
 r2 = r2_score(y_test, y_predicted)
 mae = mean_absolute_error(y_test, y_predicted)
